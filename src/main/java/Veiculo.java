@@ -20,10 +20,19 @@ public class Veiculo {
         return custoTotal - desconto(dias);
     }
 
+    // Metodo para aplicar desconto
     public double desconto(int dias){
         if (dias >= 7){
             return (dias * valorDiaria) * 0.1; // Desconto de 10% do valor total
         }
         return 0;
+    }
+
+    // Metodo para calcular multa por devolução atrasada (15% a mais por dia)
+    public double calcularMulta(int diasAtraso) {
+        if (diasAtraso < 0) {
+            throw new IllegalArgumentException("O número de dias de atraso não pode ser negativo.");
+        }
+        return diasAtraso * valorDiaria * 1.15; // Multa de 15%
     }
 }
