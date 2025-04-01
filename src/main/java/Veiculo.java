@@ -1,10 +1,12 @@
+import java.text.DecimalFormat;
+
 public class Veiculo {
     private String modelo;
     private double valorDiaria;
 
     // Construtor
-    public Veiculo(String modelo, double valorDiaria){
-        if (valorDiaria < 0){
+    public Veiculo(String modelo, double valorDiaria) {
+        if (valorDiaria < 0) {
             throw new IllegalArgumentException("O valor da diária não pode ser negativo.");
         }
         this.modelo = modelo;
@@ -12,17 +14,17 @@ public class Veiculo {
     }
 
     // Metodo para calcular o custo total do aluguel
-    public double calcularCusto(int dias){
+    public double calcularCusto(int dias) {
         if (dias < 0) {
-            throw new IllegalArgumentException("O número de dias não pode ser negativo")
+            throw new IllegalArgumentException("O número de dias não pode ser negativo");
         }
-        double custoTotal = dias * valorDiaria
+        double custoTotal = dias * valorDiaria;
         return custoTotal - desconto(dias);
     }
 
     // Metodo para aplicar desconto
-    public double desconto(int dias){
-        if (dias >= 7){
+    public double desconto(int dias) {
+        if (dias >= 7) {
             return (dias * valorDiaria) * 0.1; // Desconto de 10% do valor total
         }
         return 0;
@@ -35,4 +37,11 @@ public class Veiculo {
         }
         return diasAtraso * valorDiaria * 1.15; // Multa de 15%
     }
+
+    @Override
+    public String toString() {
+        DecimalFormat df = new DecimalFormat("#,##0.00");
+        return "Modelo: " + modelo + " | Valor da Diária: R$ " + df.format(valorDiaria);
+    }
 }
+
