@@ -1,16 +1,21 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
-import java.text.DecimalFormat;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        DecimalFormat df = new DecimalFormat("#,##0.00");
+        List<Veiculo> veiculos = new ArrayList<>();
+        List<Integer> diasAlugados = new ArrayList<>();
+        List<Integer> diasAtraso = new ArrayList<>();
 
+        // Perguntar quantos carros deseja cadastrar
         System.out.print("Quantos veículos deseja cadastrar? ");
-        int quantidade = scanner.nextInt();
+        int quantidadeVeiculos = scanner.nextInt();
         scanner.nextLine(); // Consumir quebra de linha
 
-        for (int i = 0; i < quantidade; i++) {
+        // Capturar dados dos veículos
+        for (int i = 0; i < quantidadeVeiculos; i++) {
             System.out.println("\nCadastro do veículo " + (i + 1) + ":");
 
             System.out.print("Digite o modelo do veículo: ");
@@ -19,34 +24,46 @@ public class Main {
             System.out.print("Digite o valor da diária: ");
             double valorDiaria = scanner.nextDouble();
 
-            System.out.print("Quantos dias o veículo foi alugado? ");
-            int diasAlugados = scanner.nextInt();
+            System.out.print("Digite a quantidade de dias alugados: ");
+            int dias = scanner.nextInt();
 
             System.out.print("Houve atraso na devolução? (Sim/Não): ");
             scanner.nextLine(); // Consumir quebra de linha
-            String resposta = scanner.nextLine();
-
-            int diasAtraso = 0;
-            if (resposta.equalsIgnoreCase("Sim")) {
-                System.out.print("Quantos dias de atraso? ");
-                diasAtraso = scanner.nextInt();
+            String resposta = scanner.nextLine().trim().toLowerCase();
+            int atraso = 0;
+            if (resposta.equals("sim")) {
+                System.out.print("Digite a quantidade de dias de atraso: ");
+                atraso = scanner.nextInt();
+                scanner.nextLine(); // Consumir quebra de linha
             }
 
+            // Criar e armazenar o veículo
             Veiculo veiculo = new Veiculo(modelo, valorDiaria);
-            double custoInicial = diasAlugados * valorDiaria;
-            double desconto = veiculo.desconto(diasAlugados);
-            double multa = veiculo.calcularMulta(diasAtraso);
+            veiculos.add(veiculo);
+            diasAlugados.add(dias);
+            diasAtraso.add(atraso);
+        }
+
+        // Exibir os dados de todos os veículos cadastrados
+        System.out.println("\n---------------- RELATÓRIO DE VEÍCULOS ----------------");
+
+        for (int i = 0; i < veiculos.size(); i++) {
+            Veiculo v = veiculos.get(i);
+            int dias = diasAlugados.get(i);
+            int atraso = diasAtraso.get(i);
+
+            double custoInicial = v.calcularCusto(dias) + v.desconto(dias);
+            double desconto = v.desconto(dias);
+            double multa = v.calcularMulta(atraso);
             double valorFinal = custoInicial - desconto + multa;
 
-            // Exibir os resultados
-            System.out.println("\n" + veiculo);
-            System.out.println("Custo inicial para " + diasAlugados + " dias: R$ " + df.format(custoInicial));
-            System.out.println("Desconto aplicado: R$ " + df.format(desconto));
-            System.out.println("Multa por " + diasAtraso + " dias de atraso: R$ " + df.format(multa));
-            System.out.println("Valor Final a ser pago: R$ " + df.format(valorFinal) + "\n");
+            System.out.println("\n" + v);
+            System.out.printf("Custo inicial para %d dias: R$ %.2f%n", dias, custoInicial);
+            System.out.printf("Desconto aplicado: R$ %.2f%n", desconto);
+            System.out.printf("Multa por %d dias de atraso: R$ %.2f%n", atraso, multa);
+            System.out.printf("Valor Final a ser pago: R$ %.2f%n", valorFinal);
         }
 
         scanner.close();
     }
 }
-

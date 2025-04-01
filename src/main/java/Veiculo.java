@@ -1,5 +1,3 @@
-import java.text.DecimalFormat;
-
 public class Veiculo {
     private String modelo;
     private double valorDiaria;
@@ -40,8 +38,7 @@ public class Veiculo {
 
     @Override
     public String toString() {
-        DecimalFormat df = new DecimalFormat("#,##0.00");
-        return "Modelo: " + modelo + " | Valor da Diária: R$ " + df.format(valorDiaria);
+        return "Modelo: " + modelo + " | Valor da Diária: R$ " + String.format("%.2f", valorDiaria);
     }
 }
 
