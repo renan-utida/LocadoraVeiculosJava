@@ -30,12 +30,12 @@ public class Veiculo {
         return 0;
     }
 
-    // Metodo para calcular multa por devolução atrasada (15% a mais por dia)
+    // Metodo para calcular multa por devolução atrasada (20% por dia)
     public double calcularMulta(int diasAtraso) {
         if (diasAtraso < 0) {
             throw new IllegalArgumentException("O número de dias de atraso não pode ser negativo.");
         }
-        return diasAtraso * valorDiaria * 1.15; // Multa de 15%
+        return diasAtraso * valorDiaria * 1.20; // Multa de 20% sobre o valor da diária
     }
 
     @Override
