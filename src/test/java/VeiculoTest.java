@@ -5,48 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class VeiculoTest {
 
     @Test
-    @DisplayName("Cálculo da multa por atraso")
-    void testCalcularMulta() {
-        Veiculo veiculo = new Veiculo("Hatch", 150.0);
-        int diasAtraso = 3;
-
-        double resultado = veiculo.calcularMulta(diasAtraso);
-
-        assertEquals(540.0, resultado, 0.01); // 3 * 150 * 1.2
-    }
-
-    @Test
-    @DisplayName("Custo para zero dias de aluguel")
-    void testCustoZeroDias() {
-        Veiculo veiculo = new Veiculo("Hatch", 120.0);
-        int dias = 0;
-
-        double resultado = veiculo.calcularCusto(dias);
-
-        assertEquals(0.0, resultado, 0.01);
-    }
-
-    @Test
-    @DisplayName("Exceção para valor de diária negativo")
-    void testValorDiariaNegativo() {
-        assertThrows(IllegalArgumentException.class, () -> new Veiculo("Sedan", -50.0));
-    }
-
-    @Test
-    @DisplayName("Exceção para número de dias negativos no cálculo de custo")
-    void testDiasNegativos() {
-        Veiculo veiculo = new Veiculo("Sedan", 100.0);
-        int dias = -5;
-
-        assertThrows(IllegalArgumentException.class, () -> veiculo.calcularCusto(dias));
-    }
-
-
-
-
-
-
-    @Test
     @DisplayName("Teste do construtor com valores válidos")
     public void testConstrutorValoresValidos() {
         // Arrange
@@ -62,7 +20,7 @@ public class VeiculoTest {
     }
 
     @Test
-    @DisplayName("Teste do construtor com valor diária negativo - deve lançar exceção")
+    @DisplayName("Exceção para Teste do construtor com valor de diária negativo")
     public void testConstrutorValorDiariaNegativo() {
         // Arrange
         String modelo = "Sedan";
@@ -72,6 +30,12 @@ public class VeiculoTest {
         assertThrows(IllegalArgumentException.class, () -> {
             new Veiculo(modelo, valorDiaria);
         });
+    }
+
+    @Test
+    @DisplayName("Exceção para valor de diária negativo")
+    void testValorDiariaNegativo() {
+        assertThrows(IllegalArgumentException.class, () -> new Veiculo("Sedan", -50.0));
     }
 
     @Test
@@ -110,6 +74,19 @@ public class VeiculoTest {
         // Arrange
         Veiculo veiculo = new Veiculo("Pickup", 80.0);
         int dias = 0;
+
+        // Act & Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            veiculo.calcularCusto(dias);
+        });
+    }
+
+    @Test
+    @DisplayName("Exceção para número de dias negativos no cálculo de custo - Teste calcularCusto")
+    void testDiasNegativos() {
+        // Arrange
+        Veiculo veiculo = new Veiculo("Sedan", 100.0);
+        int dias = -5;
 
         // Act & Assert
         assertThrows(IllegalArgumentException.class, () -> {
@@ -163,7 +140,7 @@ public class VeiculoTest {
     }
 
     @Test
-    @DisplayName("Teste calcularMulta para 3 dias de atraso")
+    @DisplayName("Cálculo da multa por atraso (3 dias) - Teste calcularMulta")
     public void testCalcularMulta() {
         // Arrange
         Veiculo veiculo = new Veiculo("SUV", 100.0);

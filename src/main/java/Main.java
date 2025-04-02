@@ -23,8 +23,8 @@ public class Main {
             while (true) {
                 try {
                     System.out.print("Digite o valor da diária: ");
-                    valorDiaria = Double.parseDouble(scanner.nextLine().trim());
-                    if (valorDiaria < 0) throw new IllegalArgumentException();
+                    valorDiaria = Double.parseDouble(scanner.nextLine().trim().replace(",", "."));
+                    if (valorDiaria <= 0) throw new IllegalArgumentException();
                     break;
                 } catch (Exception e) {
                     System.out.println("Erro: O valor da diária deve ser um número positivo.\n");
@@ -43,7 +43,7 @@ public class Main {
                     if (dias <= 0) throw new IllegalArgumentException();
                     break;
                 } catch (Exception e) {
-                    System.out.println("Erro: O número de dias deve ser um valor positivo.\n");
+                    System.out.println("Erro: O número de dias deve ser um número inteiro positivo.\n");
                 }
             }
 
@@ -68,7 +68,7 @@ public class Main {
                                 multa = veiculo.calcularMulta(diasAtraso);
                                 break;
                             } catch (Exception e) {
-                                System.out.println("Erro: O número de dias de atraso deve ser positivo.\n");
+                                System.out.println("Erro: O número de dias de atraso deve ser um numero inteiro positivo.\n");
                             }
                         }
                     }
@@ -85,7 +85,7 @@ public class Main {
             System.out.println(veiculo);
             System.out.println("Custo inicial para " + dias + " dias: R$ " + df.format(custoInicial));
             System.out.println("Desconto aplicado: R$ " + df.format(desconto));
-            System.out.println("Multa por " + diasAtraso + " dias de atraso: R$ " + df.format(multa));
+            System.out.println("Multa por " + diasAtraso + " dias de atraso na devolução: R$ " + df.format(multa));
             System.out.println("Valor Final a ser pago: R$ " + df.format(valorFinal));
         } catch (Exception e) {
             System.out.println("Ocorreu um erro inesperado. Tente novamente.\n");
