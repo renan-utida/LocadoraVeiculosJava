@@ -91,6 +91,10 @@ Foram implementados vários cenários de teste para garantir o correto funcionam
 
 ---
 
+![testes-locadora-rodando](https://github.com/user-attachments/assets/4256b355-df4b-4f60-b590-e98e85d8f086)
+
+---
+
 ## 🚀 Exemplo de Uso
 Exemplo de uso do sistema via linha de comando:
 1. Execute o programa
