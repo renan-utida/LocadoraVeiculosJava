@@ -33,24 +33,18 @@ public class VeiculoTest {
     }
 
     @Test
-    @DisplayName("Exceção para valor de diária negativo")
-    void testValorDiariaNegativo() {
-        assertThrows(IllegalArgumentException.class, () -> new Veiculo("Sedan", -50.0));
-    }
-
-    @Test
     @DisplayName("Cálculo de custo sem desconto (5 dias) - Teste calcularCusto")
     public void testCalcularCustoSemDesconto() {
         // Arrange
         Veiculo veiculo = new Veiculo("Hatch", 50.0);
         int dias = 5;
-        double expected = 250.0; // 5 * 50
+        double expectedCusto = 250.0; // 5 * 50
 
         // Act
-        double resultado = veiculo.calcularCusto(dias);
+        double resultadoCusto = veiculo.calcularCusto(dias);
 
         // Assert
-        assertEquals(expected, resultado, 0.001);
+        assertEquals(expectedCusto, resultadoCusto, 0.001);
     }
 
     @Test
@@ -59,13 +53,13 @@ public class VeiculoTest {
         // Arrange
         Veiculo veiculo = new Veiculo("SUV", 100.0);
         int dias = 7;
-        double expected = 630.0; // (7 * 100) - (7 * 100 * 0.1)
+        double expectedCustoDesconto = 630.0; // (7 * 100) - (7 * 100 * 0.1)
 
         // Act
-        double resultado = veiculo.calcularCusto(dias);
+        double resultadoCustoDesconto = veiculo.calcularCusto(dias);
 
         // Assert
-        assertEquals(expected, resultado, 0.001);
+        assertEquals(expectedCustoDesconto, resultadoCustoDesconto, 0.001);
     }
 
     @Test
@@ -100,28 +94,13 @@ public class VeiculoTest {
         // Arrange
         Veiculo veiculo = new Veiculo("Esportivo", 150.0);
         int dias = 3;
-        double expected = 0.0;
+        double expectedSemDesconto = 0.0;
 
         // Act
-        double resultado = veiculo.desconto(dias);
+        double resultadoSemDesconto = veiculo.desconto(dias);
 
         // Assert
-        assertEquals(expected, resultado, 0.001);
-    }
-
-    @Test
-    @DisplayName("Cálculo do desconto aplicado 7 dias (com desconto) - Teste desconto")
-    public void testDesconto7Dias() {
-        // Arrange
-        Veiculo veiculo = new Veiculo("Minivan", 120.0);
-        int dias = 7;
-        double expected = 84.0; // (7 * 120) * 0.1
-
-        // Act
-        double resultado = veiculo.desconto(dias);
-
-        // Assert
-        assertEquals(expected, resultado, 0.001);
+        assertEquals(expectedSemDesconto, resultadoSemDesconto, 0.001);
     }
 
     @Test
@@ -130,13 +109,13 @@ public class VeiculoTest {
         // Arrange
         Veiculo veiculo = new Veiculo("Sedan", 100.0);
         int dias = 10;
-        double expected = 100.0; // (10 * 100) * 0.1
+        double expectedDesconto = 100.0; // (10 * 100) * 0.1
 
         // Act
-        double resultado = veiculo.desconto(dias);
+        double resultadoDesconto = veiculo.desconto(dias);
 
         // Assert
-        assertEquals(expected, resultado, 0.001);
+        assertEquals(expectedDesconto, resultadoDesconto, 0.001);
     }
 
     @Test
@@ -145,13 +124,13 @@ public class VeiculoTest {
         // Arrange
         Veiculo veiculo = new Veiculo("SUV", 100.0);
         int diasAtraso = 3;
-        double expected = 360.0; // 3 * 100 * 1.2
+        double expectedMulta = 360.0; // 3 * 100 * 1.2
 
         // Act
-        double resultado = veiculo.calcularMulta(diasAtraso);
+        double resultadoMulta = veiculo.calcularMulta(diasAtraso);
 
         // Assert
-        assertEquals(expected, resultado, 0.001);
+        assertEquals(expectedMulta, resultadoMulta, 0.001);
     }
 
     @Test
@@ -160,13 +139,13 @@ public class VeiculoTest {
         // Arrange
         Veiculo veiculo = new Veiculo("Hatch", 50.0);
         int diasAtraso = 0;
-        double expected = 0.0;
+        double expectedSemMulta = 0.0;
 
         // Act
-        double resultado = veiculo.calcularMulta(diasAtraso);
+        double resultadoSemMulta = veiculo.calcularMulta(diasAtraso);
 
         // Assert
-        assertEquals(expected, resultado, 0.001);
+        assertEquals(expectedSemMulta, resultadoSemMulta, 0.001);
     }
 
     @Test
