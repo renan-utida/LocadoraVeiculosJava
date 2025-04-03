@@ -42,6 +42,7 @@ O projeto é composto por duas classes principais e uma de teste:
 │       └── java
 │           └── VeiculoTest.java  # Testes unitários para a classe Veiculo
 │── README.md  # Documentação do projeto
+│── pom.xml  # Onde foi adicionado a dependencia
 │── .gitignore  # Arquivos ignorados pelo Git
 ```
 
